@@ -67,4 +67,4 @@ This project is a plant monitoring system based on the ESP32 microcontroller. It
   mosquitto -v
 
 ##4. Node-Red Setup
-![Node-Red setup](Screenshot 2025-11-30 183352.png)
+![Node-Red setup](Node_red_conf.jpg)
