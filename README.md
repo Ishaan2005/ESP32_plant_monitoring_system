@@ -66,5 +66,5 @@ This project is a plant monitoring system based on the ESP32 microcontroller. It
   ```bash
   mosquitto -v
 
-##4. Node-Red Setup
+### 4. Node-Red Setup
 ![Node-Red setup](Node_red_conf.jpg)
