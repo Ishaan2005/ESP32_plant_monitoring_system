@@ -40,6 +40,10 @@ This project is a plant monitoring system based on the ESP32 microcontroller. It
 | VCC (both)       | 3.3V      |
 | GND (both)       | GND       |
 
+
+##Pin Diagram of ESP32
+![esp32_pinout](esp32_pinout.jpeg)
+
 ## Installation and Setup
 
 ### 1. Flash ESP32
@@ -61,3 +65,6 @@ This project is a plant monitoring system based on the ESP32 microcontroller. It
 - Install Mosquitto and run it locally:
   ```bash
   mosquitto -v
+
+##4. Node-Red Setup
+![Node-Red setup](Screenshot 2025-11-30 183352.png)
