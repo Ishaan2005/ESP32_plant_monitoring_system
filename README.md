@@ -41,7 +41,7 @@ This project is a plant monitoring system based on the ESP32 microcontroller. It
 | GND (both)       | GND       |
 
 
-##Pin Diagram of ESP32
+## Pin Diagram of ESP32
 ![esp32_pinout](esp32_pinout.jpeg)
 
 ## Installation and Setup
