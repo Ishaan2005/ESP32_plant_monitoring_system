@@ -1,0 +1,230 @@
+[
+    {
+        "id": "4133c1ac7690767d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b80cc0dbe26861ad",
+        "type": "mqtt in",
+        "z": "4133c1ac7690767d",
+        "name": "",
+        "topic": "sensor/data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "911b91beec6a675f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "909daba05a9f2320",
+                "daee686eefe80582",
+                "fe78d48d795e26b5",
+                "6ed64b6fc2b9a224"
+            ]
+        ]
+    },
+    {
+        "id": "909daba05a9f2320",
+        "type": "debug",
+        "z": "4133c1ac7690767d",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f55b88f881c009c7",
+        "type": "mqtt out",
+        "z": "4133c1ac7690767d",
+        "name": "",
+        "topic": "sensor/data",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "911b91beec6a675f",
+        "x": 550,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ca985c8a9be0d0da",
+        "type": "csv",
+        "z": "4133c1ac7690767d",
+        "name": "plant_data.csv",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "once",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "time,temperature,humidity,moisture",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": true,
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "42902780884f3f79"
+            ]
+        ]
+    },
+    {
+        "id": "42902780884f3f79",
+        "type": "file",
+        "z": "4133c1ac7690767d",
+        "name": "plant_data.csv",
+        "filename": "E:\\node_red_data\\plant_data.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 660,
+        "y": 320,
+        "wires": [
+            [
+                "9b9e222733788835"
+            ]
+        ]
+    },
+    {
+        "id": "daee686eefe80582",
+        "type": "function",
+        "z": "4133c1ac7690767d",
+        "name": "function 2",
+        "func": "// Example incoming: \"temperature:26.5,humidity:45.2,soil_moisture:60.3\"\nvar payload = msg.payload;\nvar data = {};\nvar parts, i, kv;\n\nif (typeof payload === \"string\") {\n    parts = payload.split(\",\");\n    for (i = 0; i < parts.length; i++) {\n        kv = parts[i].split(\":\");\n        var key = kv[0].trim();\n        var value = parseFloat(kv[1]);\n        data[key] = value;\n    }\n\n    msg.payload = {\n        time: new Date().toISOString(),\n        temperature: data[\"temperature\"],\n        humidity: data[\"humidity\"],\n        moisture: data[\"soil_moisture\"]\n    };\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "ca985c8a9be0d0da"
+            ]
+        ]
+    },
+    {
+        "id": "9b9e222733788835",
+        "type": "debug",
+        "z": "4133c1ac7690767d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "fe78d48d795e26b5",
+        "type": "delay",
+        "z": "4133c1ac7690767d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [
+                "f55b88f881c009c7"
+            ]
+        ]
+    },
+    {
+        "id": "6ed64b6fc2b9a224",
+        "type": "delay",
+        "z": "4133c1ac7690767d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "909daba05a9f2320"
+            ]
+        ]
+    },
+    {
+        "id": "911b91beec6a675f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.47.61.114",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
